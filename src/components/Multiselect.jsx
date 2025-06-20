@@ -6,25 +6,25 @@ const Multiselect = ({
   onSelectionChange,
   placeholder = "Search...",
 }) => {
-  const [searchTerm, setSearchTerm] = useState(""); // поиск
-  const [isOpen, setIsOpen] = useState(false); // открыт ли список
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleSelect = (option) => {
     if (!selectedOptions.find((o) => o.value === option.value)) {
-      onSelectionChange([...selectedOptions, option]); // ← сообщаем родителю
+      onSelectionChange([...selectedOptions, option]);
     }
   };
 
   const handleDelete = (value) => {
     const updated = selectedOptions.filter((o) => o.value !== value);
-    onSelectionChange(updated); // ← сообщаем родителю
+    onSelectionChange(updated);
   };
 
   return (
     <div>
       <h2>Selected Timezones:</h2>
       {selectedOptions.length > 0 && (
-        <button onClick={() => onSelectionChange([])}>Clear all</button> // ← теперь очищает через props
+        <button onClick={() => onSelectionChange([])}>Clear all</button>
       )}
       <ul>
         {selectedOptions.map((option) => (
