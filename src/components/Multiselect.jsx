@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 const Multiselect = () => {
   const [options, setOptions] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchTimezones = async () => {
@@ -46,17 +47,29 @@ const Multiselect = () => {
         ))}
       </ul>
 
+      <input
+        type="text"
+        placeholder="Search timezone..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        style={{ marginBottom: "10px", display: "block" }}
+      />
+
       <h2>All Timezones:</h2>
       <ul>
-        {options.map((option) => (
-          <li
-            key={option.value}
-            style={{ cursor: "pointer" }}
-            onClick={() => handleSelect(option)}
-          >
-            {option.label}
-          </li>
-        ))}
+        {options
+          .filter((option) =>
+            option.label.toLowerCase().includes(searchTerm.toLowerCase())
+          )
+          .map((option) => (
+            <li
+              key={option.value}
+              style={{ cursor: "pointer" }}
+              onClick={() => handleSelect(option)}
+            >
+              {option.label}
+            </li>
+          ))}
       </ul>
     </div>
   );
