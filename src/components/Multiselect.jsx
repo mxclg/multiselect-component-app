@@ -27,12 +27,19 @@ const Multiselect = () => {
     }
   };
 
+  const handleDelete = (value) => {
+    setSelectedOptions(selectedOptions.filter((o) => o.value !== value));
+  };
+
   return (
     <div>
       <h2>Selected Timezones:</h2>
       <ul>
         {selectedOptions.map((option) => (
-          <li key={option.value}>{option.label}</li>
+          <li key={option.value}>
+            {option.label}{" "}
+            <button onClick={() => handleDelete(option.value)}>delete</button>
+          </li>
         ))}
       </ul>
 
