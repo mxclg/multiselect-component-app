@@ -1,43 +1,30 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-const Multiselect = () => {
-  const [options, setOptions] = useState([]);
-  const [selectedOptions, setSelectedOptions] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    const fetchTimezones = async () => {
-      try {
-        const res = await fetch(
-          "https://timeapi.io/api/timezone/availabletimezones"
-        );
-        const data = await res.json();
-        const formatted = data.map((item) => ({ label: item, value: item }));
-        setOptions(formatted);
-      } catch (error) {
-        console.error("Failed to fetch timezones", error);
-      }
-    };
-
-    fetchTimezones();
-  }, []);
+const Multiselect = ({
+  options,
+  selectedOptions,
+  onSelectionChange,
+  placeholder = "Search...",
+}) => {
+  const [searchTerm, setSearchTerm] = useState(""); // поиск
+  const [isOpen, setIsOpen] = useState(false); // открыт ли список
 
   const handleSelect = (option) => {
     if (!selectedOptions.find((o) => o.value === option.value)) {
-      setSelectedOptions([...selectedOptions, option]);
+      onSelectionChange([...selectedOptions, option]); // ← сообщаем родителю
     }
   };
 
   const handleDelete = (value) => {
-    setSelectedOptions(selectedOptions.filter((o) => o.value !== value));
+    const updated = selectedOptions.filter((o) => o.value !== value);
+    onSelectionChange(updated); // ← сообщаем родителю
   };
 
   return (
     <div>
       <h2>Selected Timezones:</h2>
       {selectedOptions.length > 0 && (
-        <button onClick={() => setSelectedOptions([])}>Clear all</button>
+        <button onClick={() => onSelectionChange([])}>Clear all</button> // ← теперь очищает через props
       )}
       <ul>
         {selectedOptions.map((option) => (
@@ -50,7 +37,7 @@ const Multiselect = () => {
 
       <input
         type="text"
-        placeholder="Search timezone..."
+        placeholder={placeholder}
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         onFocus={() => setIsOpen(true)}
@@ -58,7 +45,6 @@ const Multiselect = () => {
         style={{ marginBottom: "10px", display: "block" }}
       />
 
-      <h2>All Timezones:</h2>
       {isOpen && (
         <ul>
           {options
