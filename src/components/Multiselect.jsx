@@ -4,6 +4,7 @@ const Multiselect = () => {
   const [options, setOptions] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const fetchTimezones = async () => {
@@ -52,25 +53,29 @@ const Multiselect = () => {
         placeholder="Search timezone..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
+        onFocus={() => setIsOpen(true)}
+        onBlur={() => setTimeout(() => setIsOpen(false), 150)}
         style={{ marginBottom: "10px", display: "block" }}
       />
 
       <h2>All Timezones:</h2>
-      <ul>
-        {options
-          .filter((option) =>
-            option.label.toLowerCase().includes(searchTerm.toLowerCase())
-          )
-          .map((option) => (
-            <li
-              key={option.value}
-              style={{ cursor: "pointer" }}
-              onClick={() => handleSelect(option)}
-            >
-              {option.label}
-            </li>
-          ))}
-      </ul>
+      {isOpen && (
+        <ul>
+          {options
+            .filter((option) =>
+              option.label.toLowerCase().includes(searchTerm.toLowerCase())
+            )
+            .map((option) => (
+              <li
+                key={option.value}
+                style={{ cursor: "pointer" }}
+                onClick={() => handleSelect(option)}
+              >
+                {option.label}
+              </li>
+            ))}
+        </ul>
+      )}
     </div>
   );
 };
