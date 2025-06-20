@@ -34,6 +34,9 @@ const Multiselect = () => {
   return (
     <div>
       <h2>Selected Timezones:</h2>
+      {selectedOptions.length > 0 && (
+        <button onClick={() => setSelectedOptions([])}>Clear all</button>
+      )}
       <ul>
         {selectedOptions.map((option) => (
           <li key={option.value}>
