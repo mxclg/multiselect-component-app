@@ -23,14 +23,14 @@ function App() {
   }, []);
 
   return (
-    <>
+    <div className="min-h-screen bg-[#fff7f5]">
       <Multiselect
         options={options}
         selectedOptions={selectedOptions}
         onSelectionChange={setSelectedOptions}
         placeholder="Search timezone..."
       />
-    </>
+    </div>
   );
 }
 
