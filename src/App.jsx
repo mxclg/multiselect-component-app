@@ -23,7 +23,7 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#fff7f5]">
+    <div className="flex items-center justify-center h-screen bg-[#fff7f5]">
       <Multiselect
         options={options}
         selectedOptions={selectedOptions}
