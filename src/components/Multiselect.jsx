@@ -21,7 +21,7 @@ const Multiselect = ({
   };
 
   return (
-    <div>
+    <div className="flex flex-col w-[90vw] max-w-lg h-[80vh] bg-[#ffffff] p-4 rounded-xl shadow-xl">
       {selectedOptions.length > 0 && (
         <div>
           <h2>Selected Timezones:</h2>
