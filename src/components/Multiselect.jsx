@@ -22,18 +22,22 @@ const Multiselect = ({
 
   return (
     <div>
-      <h2>Selected Timezones:</h2>
       {selectedOptions.length > 0 && (
-        <button onClick={() => onSelectionChange([])}>Clear all</button>
+        <div>
+          <h2>Selected Timezones:</h2>
+          <button onClick={() => onSelectionChange([])}>Clear all</button>
+          <ul>
+            {selectedOptions.map((option) => (
+              <li key={option.value}>
+                {option.label}{" "}
+                <button onClick={() => handleDelete(option.value)}>
+                  delete
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
-      <ul>
-        {selectedOptions.map((option) => (
-          <li key={option.value}>
-            {option.label}{" "}
-            <button onClick={() => handleDelete(option.value)}>delete</button>
-          </li>
-        ))}
-      </ul>
 
       <input
         type="text"
