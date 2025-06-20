@@ -8,6 +8,7 @@ const Multiselect = ({
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [isClickInside, setIsClickInside] = useState(false);
 
   const handleSelect = (option) => {
     if (!selectedOptions.find((o) => o.value === option.value)) {
@@ -21,7 +22,15 @@ const Multiselect = ({
   };
 
   return (
-    <div className="flex flex-col w-[90vw] max-w-lg h-[80vh] bg-[#ffffff] p-4 rounded-xl shadow-xl">
+    <div
+      className="flex flex-col w-[90vw] max-w-lg h-[80vh] bg-[#ffffff] p-4 rounded-xl shadow-xl"
+      onMouseDown={() => setIsClickInside(true)}
+      onBlur={() => {
+        if (!isClickInside) setIsOpen(false);
+        setIsClickInside(false);
+      }}
+      tabIndex={0} // ← чтобы div мог ловить onBlur
+    >
       {selectedOptions.length > 0 && (
         <div>
           <h2>Selected Timezones:</h2>
@@ -45,7 +54,6 @@ const Multiselect = ({
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         onFocus={() => setIsOpen(true)}
-        onBlur={() => setTimeout(() => setIsOpen(false), 150)}
       />
 
       {isOpen && (
