@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 const Multiselect = () => {
   const [options, setOptions] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState([]);
 
   useEffect(() => {
     const fetchTimezones = async () => {
@@ -20,12 +21,31 @@ const Multiselect = () => {
     fetchTimezones();
   }, []);
 
+  const handleSelect = (option) => {
+    if (!selectedOptions.find((o) => o.value === option.value)) {
+      setSelectedOptions([...selectedOptions, option]);
+    }
+  };
+
   return (
     <div>
-      <h2>Timezones:</h2>
+      <h2>Selected Timezones:</h2>
+      <ul>
+        {selectedOptions.map((option) => (
+          <li key={option.value}>{option.label}</li>
+        ))}
+      </ul>
+
+      <h2>All Timezones:</h2>
       <ul>
         {options.map((option) => (
-          <li key={option.value}>{option.label}</li>
+          <li
+            key={option.value}
+            style={{ cursor: "pointer" }}
+            onClick={() => handleSelect(option)}
+          >
+            {option.label}
+          </li>
         ))}
       </ul>
     </div>
