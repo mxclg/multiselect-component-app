@@ -1,7 +1,9 @@
+import Multiselect from "./components/Multiselect";
+
 function App() {
   return (
     <>
-      <h1>There will be a React component</h1>
+      <Multiselect />
     </>
   );
 }
