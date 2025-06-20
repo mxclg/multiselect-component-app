@@ -49,7 +49,7 @@ const Multiselect = ({
       />
 
       {isOpen && (
-        <ul>
+        <ul className="max-h-60 overflow-y-auto">
           {options
             .filter((option) =>
               option.label.toLowerCase().includes(searchTerm.toLowerCase())
