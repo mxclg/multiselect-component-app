@@ -24,7 +24,6 @@ function App() {
 
   return (
     <>
-      <h1>Multiselect Timezones</h1>
       <Multiselect
         options={options}
         selectedOptions={selectedOptions}
