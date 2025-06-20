@@ -46,7 +46,6 @@ const Multiselect = ({
         onChange={(e) => setSearchTerm(e.target.value)}
         onFocus={() => setIsOpen(true)}
         onBlur={() => setTimeout(() => setIsOpen(false), 150)}
-        style={{ marginBottom: "10px", display: "block" }}
       />
 
       {isOpen && (
