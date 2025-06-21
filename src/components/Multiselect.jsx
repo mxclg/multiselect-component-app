@@ -51,7 +51,7 @@ const Multiselect = ({
       </div>
 
       <div className="w-1/2 pl-2">
-        <h2>Selected Timezones</h2>
+        <h2 className="mb-2 font-bold">Selected Timezones</h2>
         {selectedOptions.length > 0 ? (
           <>
             <button
