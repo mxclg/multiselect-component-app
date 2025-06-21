@@ -1,3 +1,5 @@
+[![Maintainability](https://qlty.sh/badges/4c175e0e-d0d4-4ff1-bd36-0015b9efbee9/maintainability.svg)](https://qlty.sh/gh/mxclg/projects/multiselect-component-app)
+
 # Multiselect Timezones
 
 A simple React + Tailwind CSS app with a reusable multi-select dropdown for timezones.
