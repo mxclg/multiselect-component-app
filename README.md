@@ -3,7 +3,7 @@
 A simple React + Tailwind CSS app with a reusable multi-select dropdown for timezones.
 A test task for [Tivali](https://tivaliclub.com/).
 
-Live demo on (Vercel)[https://multiselect-component-app.vercel.app/]
+Live demo on [Vercel](https://multiselect-component-app.vercel.app/)
 
 ## Stack
 
