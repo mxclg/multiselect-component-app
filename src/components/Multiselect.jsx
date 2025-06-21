@@ -22,57 +22,66 @@ const Multiselect = ({
   };
 
   return (
-    <div
-      className="flex flex-col w-[90vw] max-w-lg h-[80vh] bg-[#ffffff] p-4 rounded-xl shadow-xl"
-      onMouseDown={() => setIsClickInside(true)}
-      onBlur={() => {
-        if (!isClickInside) setIsOpen(false);
-        setIsClickInside(false);
-      }}
-      tabIndex={0} // ← чтобы div мог ловить onBlur
-    >
-      {selectedOptions.length > 0 && (
-        <div>
-          <h2>Selected Timezones:</h2>
-          <button onClick={() => onSelectionChange([])}>Clear all</button>
-          <ul>
-            {selectedOptions.map((option) => (
-              <li key={option.value}>
-                {option.label}{" "}
-                <button onClick={() => handleDelete(option.value)}>
-                  delete
-                </button>
-              </li>
-            ))}
+    <div className="flex w-full max-w-lg bg-white p-4 rounded-xl shadow-xl">
+      <div className="w-1/2 pr-2">
+        <input
+          type="text"
+          placeholder={placeholder}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          onFocus={() => setIsOpen(true)}
+          className="w-full border rounded px-2 py-1"
+        />
+        {isOpen && (
+          <ul className="mt-2 max-h-60 overflow-y-auto border rounded">
+            {options
+              .filter((o) =>
+                o.label.toLowerCase().includes(searchTerm.toLowerCase())
+              )
+              .map((option) => (
+                <li
+                  key={option.value}
+                  className="px-2 py-1 cursor-pointer hover:bg-gray-100"
+                  onMouseDown={() => handleSelect(option)}
+                >
+                  {option.label}
+                </li>
+              ))}
           </ul>
-        </div>
-      )}
+        )}
+      </div>
 
-      <input
-        type="text"
-        placeholder={placeholder}
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        onFocus={() => setIsOpen(true)}
-      />
-
-      {isOpen && (
-        <ul className="max-h-60 overflow-y-auto">
-          {options
-            .filter((option) =>
-              option.label.toLowerCase().includes(searchTerm.toLowerCase())
-            )
-            .map((option) => (
-              <li
-                key={option.value}
-                style={{ cursor: "pointer" }}
-                onClick={() => handleSelect(option)}
-              >
-                {option.label}
-              </li>
-            ))}
-        </ul>
-      )}
+      <div className="w-1/2 pl-2">
+        <h2>Selected Timezones</h2>
+        {selectedOptions.length > 0 ? (
+          <>
+            <button
+              onClick={() => onSelectionChange([])}
+              className="mb-2 text-sm text-red-500 hover:underline"
+            >
+              Clear all
+            </button>
+            <ul>
+              {selectedOptions.map((o) => (
+                <li
+                  key={o.value}
+                  className="mb-1 flex justify-between items-center"
+                >
+                  <span>{o.label}</span>
+                  <button
+                    onClick={() => handleDelete(o.value)}
+                    className="text-red-500 text-sm"
+                  >
+                    delete
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </>
+        ) : (
+          <p className="text-gray-500">No timezones selected</p>
+        )}
+      </div>
     </div>
   );
 };
