@@ -8,7 +8,6 @@ const Multiselect = ({
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const [isClickInside, setIsClickInside] = useState(false);
 
   const handleSelect = (option) => {
     if (!selectedOptions.find((o) => o.value === option.value)) {
