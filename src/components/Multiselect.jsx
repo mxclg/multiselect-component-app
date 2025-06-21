@@ -21,7 +21,7 @@ const Multiselect = ({
   };
 
   return (
-    <div className="flex w-full max-w-lg bg-white p-4 rounded-xl shadow-xl">
+    <div className="flex w-full max-w-4xl bg-white p-4 rounded-xl shadow-xl">
       <div className="w-1/2 pr-2">
         <input
           type="text"
