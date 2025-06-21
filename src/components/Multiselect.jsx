@@ -56,7 +56,7 @@ const Multiselect = ({
           <>
             <button
               onClick={() => onSelectionChange([])}
-              className="mb-2 text-sm text-red-500 hover:underline"
+              className="mb-2 text-sm text-red-400 hover:text-red-600"
             >
               Clear all
             </button>
@@ -69,9 +69,10 @@ const Multiselect = ({
                   <span>{o.label}</span>
                   <button
                     onClick={() => handleDelete(o.value)}
-                    className="text-red-500 text-sm"
+                    className="text-red-400 hover:text-red-300 ml-2 text-lg leading-none"
+                    aria-label="Remove"
                   >
-                    delete
+                    &times;
                   </button>
                 </li>
               ))}
